@@ -1,5 +1,7 @@
 # vestaboard-go
 
+[Demo](./demo.jpg)
+
 To install dependencies:
 
 ```bash
