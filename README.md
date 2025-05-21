@@ -1,6 +1,6 @@
 # vestaboard-go
 
-[Demo](./demo.jpg)
+![Go Demo](./demo.jpg)
 
 To install dependencies:
 
