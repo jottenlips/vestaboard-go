@@ -68,11 +68,10 @@ const play = async () => {
       }
 
       game = next;
-      printVestaboard(game);
+      // GOFAI has next move
+      printVestaboard(game, 'GO Agent is thinking...');
       await sleep(15_000);
     } else {
-      printVestaboard(game, "GO Agent is thinking...");
-      await sleep(15_000);
       const move = pickMove(game);
       if (move) {
         game = dispatch(game, { type: "PLACE_STONE", ...move });
