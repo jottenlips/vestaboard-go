@@ -134,7 +134,7 @@ export const printVestaboard = async (state: GameState, text?: string) => {
       {
         style: {
           absolutePosition: {
-            x: state.size,
+            x: state.size + 1,
             y: 0,
           },
 

@@ -9,7 +9,7 @@ bun install
 .env
 
 ```
-
+VESTABOARD_WRITE_KEY=.....
 ```
 
 To play the Go AI (Good ol fashion AI) run:
