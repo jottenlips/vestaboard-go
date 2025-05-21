@@ -79,7 +79,8 @@ export const removeGroup = (board: Stone[][], group: Coord[]) => {
 };
 
 export const sleep = async (time?: any) =>
-  await new Promise((resolve) => setTimeout(resolve, time || 30_000));
+  Bun.env.VESTABOARD_WRITE_KEY &&
+  (await new Promise((resolve) => setTimeout(resolve, time || 30_000)));
 
 export const printBoard = (state: GameState) => {
   console.log(
