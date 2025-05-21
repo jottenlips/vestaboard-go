@@ -112,6 +112,11 @@ export const sendTextToVestaboard = async (text: string) => {
 };
 
 export const printVestaboard = async (state: GameState, text?: string) => {
+  if (!Bun.env.VESTABOARD_WRITE_KEY) {
+    printBoard(state);
+    console.log(text ? text : `${state.turn}'s move`);
+    return;
+  }
   const yellowUNfilledBoard = 65;
   const blackStone = 70;
   const whiteStone = 69;
