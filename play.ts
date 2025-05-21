@@ -36,7 +36,10 @@ const play = async () => {
         const winner = calculateWinner(game);
         if (winner) {
           console.log(`Game over! Winner: ${winner}`);
-          printVestaboard(game, `Game over! Winner: ${winner}`);
+          printVestaboard(
+            game,
+            `Game over! Winner: ${winner?.winner}. Score: B ${winner?.score.B}, W ${winner?.score.W}`
+          );
         } else {
           console.log("Game over! No winner.");
           printVestaboard(game, "Game over! No winner.");
@@ -80,12 +83,6 @@ const play = async () => {
         game = dispatch(game, { type: "PASS" });
       }
     }
-  }
-  if (game.phase === "GameOver") {
-    // winner
-    console.log("Game over!");
-    printBoard(game);
-    sendTextToVestaboard("Game over! Thanks for playing.");
   }
 };
 
