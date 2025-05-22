@@ -30,6 +30,13 @@ const play = async () => {
         break;
       }
 
+      if (trimmed === 'pass') {
+        game = dispatch(game, { type: "PASS" });
+        printVestaboard(game, "You passed, GO Agent is thinking...");
+        await sleep(15_000);
+        continue;
+      }
+
       const gameover = trimmed === "endgame";
       if (gameover) {
         game = dispatch(game, { type: "FORCE_END" });
@@ -38,7 +45,7 @@ const play = async () => {
           console.log(`Game over! Winner: ${winner}`);
           printVestaboard(
             game,
-            `Game over! Winner: ${winner?.winner}. Score: B ${winner?.score.B}, W ${winner?.score.W}`
+            `Game over! ${winner?.winner} is the winner!\nScore: B ${winner?.score.B}, W ${winner?.score.W || 0}`
           );
         } else {
           console.log("Game over! No winner.");
