@@ -10,6 +10,11 @@ export interface GameState {
   turn: Player;
   phase: "Idle" | "GameOver";
   passes: number;
+  countCaptures: boolean;
+  captures: {
+    B: number; // Black’s captured stones
+    W: number; // White’s captured stones
+  };
 }
 
 export const createGame = (size = 9): GameState => ({
@@ -18,6 +23,11 @@ export const createGame = (size = 9): GameState => ({
   turn: "B",
   phase: "Idle",
   passes: 0,
+  countCaptures: true,
+  captures: {
+    B: 0,
+    W: 0,
+  },
 });
 
 export const switchTurn = (player: Player): Player =>
@@ -212,6 +222,7 @@ export const dispatch = (state: GameState, event: Event): GameState => {
 
     for (const group of groupsToCapture) {
       removeGroup(newState.board, group);
+      if (newState.countCaptures) newState.captures[state.turn] += group.length;
     }
 
     // Check suicide on newly placed stone (using newState again)
@@ -280,6 +291,10 @@ export function calculateWinner(state: GameState): {
       }
     }
   }
+
+  // ✅ Add captured stones to score
+  score.B += state.captures.B;
+  score.W += state.captures.W;
 
   const winner = score.B > score.W ? "B" : score.W > score.B ? "W" : "Tie";
 
