@@ -30,7 +30,7 @@ const play = async () => {
         break;
       }
 
-      if (trimmed === 'pass') {
+      if (trimmed === "pass") {
         game = dispatch(game, { type: "PASS" });
         printVestaboard(game, "You passed, GO Agent is thinking...");
         await sleep(15_000);
@@ -40,12 +40,14 @@ const play = async () => {
       const gameover = trimmed === "endgame";
       if (gameover) {
         game = dispatch(game, { type: "FORCE_END" });
-        const winner = calculateWinner(game);
+        const { winner, score } = calculateWinner(game);
         if (winner) {
           console.log(`Game over! Winner: ${winner}`);
           printVestaboard(
             game,
-            `Game over! ${winner?.winner} is the winner!\nScore: B ${winner?.score.B}, W ${winner?.score.W || 0}`
+            `Game over! ${winner} is the winner!\nScore: B ${
+              score.B || "0"
+            }, W ${score.W || "0"}`
           );
         } else {
           console.log("Game over! No winner.");
@@ -76,7 +78,7 @@ const play = async () => {
 
       game = next;
       // GOFAI has next move
-      printVestaboard(game, 'GO Agent is thinking...');
+      printVestaboard(game, "GO Agent is thinking...");
       await sleep(15_000);
     } else {
       const move = pickMove(game);
